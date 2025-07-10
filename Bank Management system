@@ -1,0 +1,199 @@
+import java.util.*;
+
+
+class Account {
+    int accNo;
+    String name;
+    double balance;
+    List<String> transactions;
+
+    Account(int accNo, String name, double balance) {
+        this.accNo = accNo;
+        this.name = name;
+        this.balance = balance;
+        this.transactions = new ArrayList<>();
+        addTransaction("Account created with balance: ₹" + balance);
+    }
+
+    void deposit(double amount) {
+        balance += amount;
+        addTransaction("Deposited: ₹" + amount);
+    }
+
+    boolean withdraw(double amount) {
+        if (amount > balance) return false;
+        balance -= amount;
+        addTransaction("Withdrawn: ₹" + amount);
+        return true;
+    }
+
+    void addTransaction(String record) {
+        transactions.add(record);
+    }
+
+    void showTransactions() {
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions yet.");
+            return;
+        }
+        System.out.println("Transaction History:");
+        for (String t : transactions) {
+            System.out.println("- " + t);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Acc No: " + accNo + ", Name: " + name + ", Balance: ₹" + balance;
+    }
+}
+
+// Main Bank Management System
+public class BankSystem {
+    HashMap<Integer, Account> accounts = new HashMap<>();
+    int nextAccNo = 1001;
+
+    void createAccount(String name, double initialBalance) {
+        Account acc = new Account(nextAccNo, name, initialBalance);
+        accounts.put(nextAccNo, acc);
+        System.out.println(" Account created! Account No: " + nextAccNo);
+        nextAccNo++;
+    }
+
+    void viewAccount(int accNo) {
+        Account acc = accounts.get(accNo);
+        if (acc == null) {
+            System.out.println(" Account not found.");
+            return;
+        }
+        System.out.println(acc);
+        acc.showTransactions();
+    }
+
+    void deposit(int accNo, double amount) {
+        Account acc = accounts.get(accNo);
+        if (acc == null) {
+            System.out.println(" Account not found.");
+            return;
+        }
+        acc.deposit(amount);
+        System.out.println(" Amount deposited.");
+    }
+
+    void withdraw(int accNo, double amount) {
+        Account acc = accounts.get(accNo);
+        if (acc == null) {
+            System.out.println(" Account not found.");
+            return;
+        }
+        if (acc.withdraw(amount)) {
+            System.out.println(" Withdrawal successful.");
+        } else {
+            System.out.println(" Insufficient balance.");
+        }
+    }
+
+    void transfer(int fromAcc, int toAcc, double amount) {
+        Account src = accounts.get(fromAcc);
+        Account dest = accounts.get(toAcc);
+
+        if (src == null || dest == null) {
+            System.out.println(" One or both accounts not found.");
+            return;
+        }
+
+        if (src.withdraw(amount)) {
+            dest.deposit(amount);
+            src.addTransaction("Transferred ₹" + amount + " to Acc " + toAcc);
+            dest.addTransaction("Received ₹" + amount + " from Acc " + fromAcc);
+            System.out.println(" Transfer successful.");
+        } else {
+            System.out.println(" Insufficient funds.");
+        }
+    }
+
+    void showAllAccounts() {
+        if (accounts.isEmpty()) {
+            System.out.println("No accounts available.");
+            return;
+        }
+        System.out.println(" All Accounts:");
+        for (Account acc : accounts.values()) {
+            System.out.println(acc);
+        }
+    }
+
+    void run() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("\n=== Bank Management System ===");
+            System.out.println("1. Create Account");
+            System.out.println("2. View Account");
+            System.out.println("3. Deposit");
+            System.out.println("4. Withdraw");
+            System.out.println("5. Transfer");
+            System.out.println("6. Show All Accounts");
+            System.out.println("7. Exit");
+            System.out.print("Choose an option: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter name: ");
+                    sc.nextLine(); // consume newline
+                    String name = sc.nextLine();
+                    System.out.print("Enter initial balance: ");
+                    double bal = sc.nextDouble();
+                    createAccount(name, bal);
+                    break;
+
+                case 2:
+                    System.out.print("Enter account number: ");
+                    int accNo = sc.nextInt();
+                    viewAccount(accNo);
+                    break;
+
+                case 3:
+                    System.out.print("Enter account number: ");
+                    accNo = sc.nextInt();
+                    System.out.print("Enter amount to deposit: ");
+                    double dep = sc.nextDouble();
+                    deposit(accNo, dep);
+                    break;
+
+                case 4:
+                    System.out.print("Enter account number: ");
+                    accNo = sc.nextInt();
+                    System.out.print("Enter amount to withdraw: ");
+                    double wd = sc.nextDouble();
+                    withdraw(accNo, wd);
+                    break;
+
+                case 5:
+                    System.out.print("Enter source account number: ");
+                    int from = sc.nextInt();
+                    System.out.print("Enter target account number: ");
+                    int to = sc.nextInt();
+                    System.out.print("Enter amount to transfer: ");
+                    double amt = sc.nextDouble();
+                    transfer(from, to, amt);
+                    break;
+
+                case 6:
+                    showAllAccounts();
+                    break;
+
+                case 7:
+                    System.out.println(" Exiting...");
+                    return;
+
+                default:
+                    System.out.println(" Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new BankSystem().run();
+    }
+}
