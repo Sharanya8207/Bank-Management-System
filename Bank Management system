@@ -140,7 +140,7 @@ public class BankSystem {
             switch (choice) {
                 case 1:
                     System.out.print("Enter name: ");
-                    sc.nextLine(); // consume newline
+                    sc.nextLine(); 
                     String name = sc.nextLine();
                     System.out.print("Enter initial balance: ");
                     double bal = sc.nextDouble();
