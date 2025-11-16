@@ -1,4 +1,4 @@
-# 🏦 Banking System (DSA + Java Project)
+#  Banking System (DSA + Java Project)
 
 A console-based banking system implemented in **Java** demonstrating **OOP and DSA concepts**.  
 The system allows users to create accounts, deposit/withdraw money, view transaction history, and list all accounts.
