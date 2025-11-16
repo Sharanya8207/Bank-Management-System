@@ -1,28 +1,41 @@
-Description:
+# 🏦 Banking System (DSA + Java Project)
 
-This is a simple console-based Bank Management System developed in Java, demonstrating core object-oriented programming (OOP) concepts like classes, objects, encapsulation, and collections. The system allows users to manage bank accounts with functionalities such as creating accounts, depositing and withdrawing money, viewing account details, transferring funds, and tracking transaction history — all through a menu-driven interface.
+A console-based banking system implemented in **Java** demonstrating **OOP and DSA concepts**.  
+The system allows users to create accounts, deposit/withdraw money, view transaction history, and list all accounts.
 
-✅ Features:
-Create Account: Register a new user account with an auto-generated account number.
+---
 
-View Account: Display account details along with the full transaction history.
+## **Features**
+- Create new bank accounts with unique account numbers
+- Deposit and withdraw money with balance validation
+- Display account details and transaction history
+- List all existing accounts
+- Implements **ArrayList**, **HashMap**, and **basic searching/sorting**
 
-Deposit: Add funds to an account and log the transaction.
+---
 
-Withdraw: Withdraw money if sufficient balance is available.
+## **DSA Concepts Used**
+- **ArrayList** → Store transaction history  
+- **HashMap** → Fast lookup of accounts  
+- **Searching** → Find account by account number  
+- **Sorting** (optional) → Sort accounts by balance or name
 
-Transfer Funds: Send money from one account to another with dual transaction logging.
+---
 
-Transaction History: Track and display all past actions for each account.
+## **How to Run**
+1. Compile: `javac BankingSystem.java`
+2. Run: `java BankingSystem`
+3. Use console menu to interact
 
-Show All Accounts: View all registered accounts with basic details.
+---
 
-🧠 Concepts Used:
-OOP Principles – Classes (Account, BankSystem), encapsulation, method abstraction
+## **Technologies**
+- Java SE
+- OOP: Classes, Objects, Encapsulation
+- DSA: ArrayList, HashMap, Searching
 
-Java Collections – HashMap, ArrayList
+---
 
-Control Flow – Switch-case, loops, conditionals
 
-Console I/O – Scanner for input, System.out for output
+
 
