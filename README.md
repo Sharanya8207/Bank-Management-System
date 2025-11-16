@@ -18,7 +18,7 @@ The system allows users to create accounts, deposit/withdraw money, view transac
 - **ArrayList** → Store transaction history  
 - **HashMap** → Fast lookup of accounts  
 - **Searching** → Find account by account number  
-- **Sorting** (optional) → Sort accounts by balance or name
+
 
 ---
 
